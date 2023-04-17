@@ -5,7 +5,8 @@ const endPoint =
   "https://api-opg-default-rtdb.europe-west1.firebasedatabase.app/";
 
 async function start() {
-  getPosts();
+  const data = await getPosts();
+  data.forEach(showPost);
 }
 
 async function getPosts() {
@@ -25,4 +26,12 @@ function preparePostData(dataObject) {
   }
   console.log(postArray);
   return postArray;
+}
+
+function showPost(data) {
+  const myHTML = `<article class="grid-item">
+				<img src="${data.image}">
+				<h2>${data.title}</h2>
+			</article>`;
+  document.querySelector("#data").insertAdjacentHTML("beforeend", myHTML);
 }
